@@ -262,7 +262,8 @@
 			    var latlng = map.getCenter(); 
 
 			    maskSearch(latlng.getLat(), latlng.getLng());
-			    infowindow.close();
+			    if (infowindow != null)
+ 					infowindow.close();
 		    
 		});
 
