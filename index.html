@@ -5,8 +5,8 @@
         <!-- Import T-map -->
         <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=5ea6a3424c4aff7291f51b4c796677ff&libraries=services"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-        <script src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js'></script>
-        <script src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js'></script>
+        <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js'></script>
+        <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js'></script>
         <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js'></script>
         <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js'></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -62,6 +62,7 @@
         <div id="floating_search" style="position: absolute; background: white; padding: 10px; border-radius: 30px; width: 90%; height: 6vh; max-height: 60px; top: 80px; right: 5%; left: 5%; z-index: 10000;">
             <input type="text" placeholder="검색할 장소를 입력하세요" name="search" id="search" style="font-size:15px; border:none; padding: 0 20px 0 20px; width: 70%; height: 100%;">
             <button class="search" id="searchButton" style="background: rgba(255, 255, 255, 0); float: right; height: 100%;"><img src="images/search.png" alt="" style="height: 90%;"></button>
+            <button class="close" id="closeButton" style="background: rgba(255, 255, 255, 0); display: none; float: right; height: 100%;"><img src="images/close_grey.png" alt="" style="height: 90%;"></button>
         </div>
         <div id="searchListDiv" style="display: none; overflow-y: auto; background: rgb(255, 255, 255); position: absolute; padding: 10px; border-radius: 0 0 20px 20px; height: 40%; width: 90%; top: 115px; z-index: 1000;right: 5%; left: 5%; ">
         	<!-- 검색 결과 들어갈 div -->
@@ -71,7 +72,7 @@
         	<!-- 재고 정보 floating image -->
         </div>
         <!-- 현재위치로 이동시켜주는 button -->
-        <button id="current_location" style="position: absolute; left: 30px; top: 140px; width: 5vh; height: 5vh; max-height: 70px; max-width: 70px; border-radius: 50%; z-index: 1000; background: rgb(255, 255, 255); border: none;"><img src="images/gps2.png" style="height: 60%;"></button>
+        <button id="current_location" style="position: absolute; right: 30px; top: 140px; width: 5vh; height: 5vh; max-height: 70px; max-width: 70px; border-radius: 50%; z-index: 999; background: rgb(255, 255, 255); border: none;"><img src="images/gps2.png" style="height: 60%;"></button>
     </div>
 
 	<script type="text/javascript">
@@ -80,7 +81,9 @@
 		var infowindow;
 		let xhr = new XMLHttpRequest();
 		var mapContainer = document.getElementById('map'); // 지도를 표시할 div
-		var markers;
+		var markers = new Array();
+		var marker_infowindows = new Array();
+		var marker_positions = new Array();
 
 		if (checkMobileDevice()) {
 		    mapOption = { 
@@ -124,20 +127,32 @@
 			if (!current_var.replace(/^\s+|\s+$/g, '')) {
 				$("#searchListDiv").slideUp("fast");
 				floatingSearch.style.borderRadius = "20px";
+				document.getElementById('closeButton').style.display = "none";
 			} else {
 				$("#searchListDiv").slideDown("fast");
 				floatingSearch.style.borderRadius = "20px 20px 0 0";
 				resultPlace.keywordSearch(current_var, placesSearch);
+				document.getElementById('closeButton').style.display = "block";
 			}
 		});
 		
 		$("#searchButton").click(function() {
 			if (!current_var.replace(/^\s+|\s+$/g, '')) {
 			        alert('키워드를 입력해주세요!');
+					document.getElementById('closeButton').style.display = "none";
 			        return false;
 			    }
-			else
+			else {
 				resultPlace.keywordSearch(current_var, placesSearchCB);
+				document.getElementById('closeButton').style.display = "block";
+			}
+		});
+
+		$("#closeButton").click(function() {
+			$("#searchListDiv").slideUp("fast");
+			document.getElementById("search").value = "";
+			floatingSearch.style.borderRadius = "20px";
+			document.getElementById('closeButton').style.display = "none";
 		});
 
 		function checkMobileDevice() {
@@ -151,6 +166,11 @@
 	    }
 
 		function maskSearch (latitude, longitude) {
+
+			for (var i = 0; i < markers.length; i++) {
+		        markers[i].setMap(map);
+		    }
+
 			let jsonURL = "https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat="+ latitude +"&lng="+ longitude +"&m=4000";
 			xhr.open('GET', jsonURL);
 	        xhr.send();
@@ -224,9 +244,9 @@
 		            position: locPosition, 
 		            image: markerImage // 마커이미지 설정 
 				});
-
 				// 마커가 지도 위에 표시되도록 설정합니다
 				resultMarker.setMap(map); 
+
 	        } else {
 	        	resultMarker.setPosition(locPosition);
 	        }
@@ -253,19 +273,20 @@
 			            markerPosition = new kakao.maps.LatLng(lat, lon); // 마커가 표시될 위치입니다
 
 			        // 마커를 생성합니다
-			        var marker = new kakao.maps.Marker({
+			        var current_marker = new kakao.maps.Marker({
 			            position: markerPosition, 
 			            image: markerImage // 마커이미지 설정 
 					});
 
 					// 마커가 지도 위에 표시되도록 설정합니다
-					marker.setMap(map); 
+					current_marker.setMap(map); 
 
 					// 지도 중심좌표를 접속위치로 변경합니다
 					map.setCenter(locPosition);
 
 			    	maskSearch(lat, lon);
 				});
+
 			} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
 			    
 			    var locPosition = new kakao.maps.LatLng(35.912428, 128.807808),    
@@ -288,14 +309,15 @@
 			    var latlng = map.getCenter(); 
 
 			    maskSearch(latlng.getLat(), latlng.getLng());
-			    infowindow.close();
+			    for (var i = 0; i < marker_infowindows.length; i ++) {
+			    	marker_infowindows[i].setMap(null);
+			    }
 		    	
 		    	// console.log(map.getZoomLevel());
 		});
 
 		function parseJsonResult(jsonObj) {
 			let heroes = jsonObj['stores'];
-
 	        heroes.forEach(element => {
 		        var locPosition = new kakao.maps.LatLng(element.lat, element.lng);
 		        var imageSrc_red = 'images/mask_red.png', 
@@ -318,26 +340,36 @@
 					markerImage = markerImageRed;
 				else
 					markerImage = markerImageGray;
-	            var marker = new kakao.maps.Marker({
+	            var mask_marker = new kakao.maps.Marker({
 		            position: locPosition, 
 		            image: markerImage
 				});
-				marker.setMap(map); 
-				var iwContent = '<div class="overay_info"><span class="place_name"><strong>' + element.name + '</strong></span><br><span class="place_addr">' + element.addr + '</span></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-    			iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
-    			infowindow = new kakao.maps.InfoWindow({
+				var iwContent = '<div class="overay_info"><span class="place_name"><strong>' + element.name + '</strong></span><br><span class="place_addr">' + element.addr + '</span></div>'; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+    			
+    			var info_window = new kakao.maps.CustomOverlay({
 				    content : iwContent,
-				    removable : iwRemoveable
-				});
-				kakao.maps.event.addListener(marker, 'click', function() {
-				      // 마커 위에 인포윈도우를 표시합니다
-				      infowindow.open(map, marker);
-				      // infowindow.setMap(map);
-				      map.setCenter(locPosition);
+				    position: locPosition,
+				    yAnchor: 2
 				});
 
+				mask_marker.setMap(map); 
+				markers.push(mask_marker);
+				marker_infowindows.push(info_window);
+				marker_positions.push(locPosition);
 	        });
+
+	        for (var i = 0; i < markers.length; i ++) {
+				kakao.maps.event.addListener(markers[i], 'click', markerClick(markers[i], marker_infowindows[i], marker_positions[i]));
+	        }
 		}
+
+		function markerClick(marker, infowindow, position) {
+			return function() {
+				infowindow.setMap(map);
+				map.setCenter(position);
+			}
+		}
+
 	</script>
 </body>
 </html>
