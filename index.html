@@ -7,7 +7,7 @@
    <meta property="og:image:type" content="image/png">
    <meta property="og:image:width" content="1024">
    <meta property="og:image:height" content="1024"> -->
-   <title>Show me the mask - 내 주변 마스크 찾기</title>
+   <title>쇼미더마스크 - 내 주변 마스크 찾기</title>
     <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=5ea6a3424c4aff7291f51b4c796677ff&libraries=services"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js'></script>
@@ -159,7 +159,7 @@
           </div>
        </div>
     </div>
-    <div id="infoPopup" class="popup-div popup-style" style="background: #fff; position: absolute; z-index: 10000; padding: 20px;max-height: 90vh; max-width: 95vw; overflow-y: auto; margin-top: 50px; display: none;">
+    <div id="infoPopup" class="popup-div popup-style" style="background: #fff; position: absolute; z-index: 10000; padding: 20px; max-height: 90vh; max-width: 95vw; overflow-y: auto; margin-top: 50px; display: none;">
        <button id="info_detail_close" style="float: right; border: none; background: #fff;"><img src="images/close.png" alt="" style=""></button>
        <div class="popupContent">
           <div class="b-ajax-wrapper">
@@ -312,7 +312,7 @@
               searchResultList.innerHTML = '';
                 placeArray = data;
                 if (data.length < 10) {
-                   document.getElementById("searchListDiv").style.height = data.length * 43 + 10 + "px";
+                   document.getElementById("searchListDiv").style.height = data.length * 43 + 20 + "px";
                 } else {
                    document.getElementById("searchListDiv").style.height = "80%";
                 }
@@ -337,7 +337,7 @@
                 placeArray = data;
                 console.log(data.length);
                 if (data.length < 10) {
-                   document.getElementById("searchListDiv").style.height = data.length * 43 + 10 + "px";
+                   document.getElementById("searchListDiv").style.height = data.length * 43 + 20 + "px";
                 } else {
                    document.getElementById("searchListDiv").style.height = "80%";
                 }
@@ -433,6 +433,7 @@
       $("#current_location").click(function() {
          if (lat != null) {
             map.panTo(new kakao.maps.LatLng(lat, lon));
+            maskSearch(lat, lon);
          } else {
             getCurrentLocation();
          }
