@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-   <meta charset="utf-8">
-   <!-- share image -->
-   <!-- <meta property="og:image" content="http://example.com/logo.jpg">
-   <meta property="og:image:type" content="image/png">
-   <meta property="og:image:width" content="1024">
-   <meta property="og:image:height" content="1024"> -->
-   <title>쇼미더마스크 - 내 주변 마스크 찾기</title>
+	<meta charset="utf-8">
+	<!-- share image -->
+	<!-- <meta property="og:image" content="http://example.com/logo.jpg">
+	<meta property="og:image:type" content="image/png">
+	<meta property="og:image:width" content="1024">
+	<meta property="og:image:height" content="1024"> -->
+	<title>쇼미더마스크 - 내 주변 마스크 찾기</title>
     <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=5ea6a3424c4aff7291f51b4c796677ff&libraries=services"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js'></script>
@@ -21,18 +21,25 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/ui-lightness/jquery-ui.css">
+    <script src="https://favprw.tistory.com/attachment/cfile24.uf@992D4F505E183472019BF9.js"></script>
+	<script src="js/clipboard.min.js"></script>
+	<script src="js/clipboard.js"></script>
+	<script src="js/prism.js"></script>
+
+	<!-- <link rel="stylesheet" href="css/prism.css" />
+	<link rel="stylesheet" href="css/primer.css" /> -->
     <meta name="naver-site-verification" content="36060e1040e37d2e588d89eab6839216abbe48ee" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-   <meta name="Description" content="위치기반 공적 마스크 찾기"/>
-   <meta name="Keywords" content="show me the mask, 쇼미더마스크, 공적마스크, 마스크, 마스크 재고, 내위치 마스크, 코로나, 코로나19, 약국마스크"/>
-   <meta name="robots" content="index, follow"/>
-   <meta name="author" content="boramseong">
+	<meta name="Description" content="위치기반 공적 마스크 찾기"/>
+	<meta name="Keywords" content="show me the mask, 쇼미더마스크, 공적마스크, 마스크, 마스크 재고, 내위치 마스크, 내주변 마스크, 코로나, 코로나19, 약국마스크"/>
+	<meta name="robots" content="index, follow"/>
+	<meta name="author" content="boramseong">
     <style type="text/css">
-       html, body {
-          width: 100%;
-          height: 100%;
-       }
-       .search {
+    	html, body {
+    		width: 100%;
+    		height: 100%;
+    	}
+    	.search {
             border: 0;
             line-height: 26px;
             background: #253d6d;
@@ -46,58 +53,68 @@
             box-shadow: none;
         }
         .place {
-           background: white;
-           border: none;
-           width: 100%;
-           text-align: left;
+        	background: white;
+        	border: none;
+        	width: 100%;
+        	text-align: left;
         }
         .overay_info {
-           position: relative;
-           background-color: transparent;
-         background-image: url("images/title2.png");
-         background-size: 100% 100%;
-         padding: 10px 10px 20px 10px;
-         background-repeat: no-repeat;
-           z-index: 6000;
-           overflow: hidden;
-         white-space: nowrap;
+        	position: relative;
+        	background-color: transparent;
+			background-image: url("images/title2.png");
+			background-size: 100% 100%;
+			padding: 10px 10px 20px 10px;
+			background-repeat: no-repeat;
+        	z-index: 6000;
+        	overflow: hidden;
+			white-space: nowrap;
         }.overay_info .tail{
-         left:50%;
-         margin-left:-18px;
-         border-right :18px solid transparent;
-         border-top:18px solid #66aa11;
-         border-left : 18px solid transparent;
-         position:absolute;
-         bottom:-18px;
-         width:0; height:0;
-         z-index: 5000;
-      }
+			left:50%;
+			margin-left:-18px;
+			border-right :18px solid transparent;
+			border-top:18px solid #66aa11;
+			border-left : 18px solid transparent;
+			position:absolute;
+			bottom:-18px;
+			width:0; height:0;
+			z-index: 5000;
+		}
+		/*.tooltipped:after{
+			position:absolute;z-index:1000000;display:none;padding:5px 8px;font:normal normal 11px/1.5 Helvetica,arial,nimbussansl,liberationsans,freesans,clean,sans-serif,"Segoe UI Emoji","Segoe UI Symbol";color:#fff;text-align:center;text-decoration:none;text-shadow:none;text-transform:none;letter-spacing:normal;word-wrap:break-word;white-space:pre;pointer-events:none;content:attr(aria-label);background:rgba(0,0,0,0.8);border-radius:3px;-webkit-font-smoothing:subpixel-antialiased
+		}
+		.tooltipped:before{
+			position:absolute;z-index:1000001;display:none;width:0;height:0;color:rgba(0,0,0,0.8);pointer-events:none;content:"";border:5px solid transparent
+		}
+		.tooltipped:hover:before,.tooltipped:hover:after,.tooltipped:active:before,.tooltipped:active:after,.tooltipped:focus:before,.tooltipped:focus:after{
+			display:inline-block;text-decoration:none
+		}
+		.tooltipped-s:before,.tooltipped-se:before,.tooltipped-sw:before{top:auto;bottom:-5px;margin-right:-5px;border-bottom-color:rgba(0,0,0,0.8)}*/
         .place_name {
-           background-color: transparent;
-           color: #000;
-           padding: 5px;
+        	background-color: transparent;
+        	color: #000;
+        	padding: 5px;
         }
         .mask_place_info {
-           padding: 5px;
+        	padding: 5px;
         }
         .mask_place_info b {
-           padding: 5px;
-           font-size:16px;
+        	padding: 5px;
+        	font-size:16px;
         }
         .mask_place_info span {
-           padding: 5px;
-           font-size:16px;
-           word-wrap: break-word;
-           white-space: pre-line;
+        	padding: 5px;
+        	font-size:16px;
+        	word-wrap: break-word;
+        	white-space: pre-line;
         }
         #mask_info_detail {
-           box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        	box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
         }
         #floating_search, #current_location, #floating_mask_info {
-           box-shadow: 2px 1px 5px 0 rgba(0, 0, 0, 0.2);
+        	box-shadow: 2px 1px 5px 0 rgba(0, 0, 0, 0.2);
         }
         ul {
-           list-style: none;
+        	list-style: none;
         }
         li {
             text-align: -webkit-match-parent;
@@ -106,439 +123,451 @@
 </head>
 <body>
     <div id="map" style="width:100%;height:100%;">
-       <nav style="position: absolute; top: 0; width: 100%; height: 60px; padding: 0 10px 0 10px; margin:0; z-index: 5000; background: #5caceb; text-align: center;"><img src="images/title_sample.png" style="height: 60px; padding: 7px;">
-          <button id="help" style="background: rgba(255, 255, 255, 0); left: 10px; top: 10px; position: absolute; border: none;"><img style=" width: 40px; height: 40px; padding: 3px;" src="images/help_white.png"></button>
-          <button id="info" style="background: rgba(255, 255, 255, 0); right: 10px; top: 10px; position: absolute; border: none;"><img style=" width: 40px; height: 40px; padding: 3px;" src="images/more2_white.png"></button>
-       </nav>
+	    <nav style="position: absolute; top: 0; width: 100%; height: 60px; padding: 0 10px 0 10px; margin:0; z-index: 5000; background: #5caceb; text-align: center;"><img src="images/title_sample.png" style="height: 60px; padding: 7px;">
+	    	<button id="help" style="background: rgba(255, 255, 255, 0); left: 10px; top: 10px; position: absolute; border: none;"><img style=" width: 40px; height: 40px; padding: 3px;" src="images/help_white.png"></button>
+	    	<button id="info" style="background: rgba(255, 255, 255, 0); right: 10px; top: 10px; position: absolute; border: none;"><img style=" width: 40px; height: 40px; padding: 3px;" src="images/more2_white.png"></button>
+	    </nav>
         <div id="floating_search" style="position: absolute; background: white; padding: 10px; border-radius: 30px; width: 90%; height: 50px; top: 80px; right: 3%; left: 3%; z-index: 5000;">
             <input type="text" placeholder="검색할 장소를 입력하세요" name="search" id="search" style="font-size:15px; border:none; padding: 0 20px 0 20px; width: 70%; height: 100%;">
             <button class="search" id="searchButton" style="background: rgba(255, 255, 255, 0); float: right; height: 100%;"><img src="images/search.png" alt="" style="height: 90%;"></button>
             <button class="close" id="closeButton" style="background: rgba(255, 255, 255, 0); display: none; float: right; height: 100%;"><img src="images/close_grey.png" alt="" style="height: 90%;"></button>
         </div>
         <div id="searchListDiv" style="display: none; overflow-y: auto; background: rgb(255, 255, 255); position: absolute; padding: 10px; border-radius: 0 0 20px 20px; height: 0; width: 90%; top: 128px; z-index: 6000;right: 3%; left: 3%; ">
-           <!-- 검색 결과 들어갈 div -->
+        	<!-- 검색 결과 들어갈 div -->
         </div>
         <div id="floating_mask_info" style="position: absolute; z-index: 1000; left: 10px; bottom: 25px; padding: 10px 5px 10px 5px; border-radius: 10px; background: white; ">
-           <img id="mask_info_img" src="images/maskinfo2.png" style="height: 0; width: 0;">
-           <!-- 재고 정보 floating image -->
+        	<img id="mask_info_img" src="images/maskinfo2.png" style="height: 0; width: 0;">
+        	<!-- 재고 정보 floating image -->
         </div>
         <!-- 현재위치로 이동시켜주는 button -->
         <button id="current_location" style="text-align: center; position: absolute; left: 3%; top: 140px; width: 0; height: 0; max-height: 70px; max-width: 70px; border-radius: 50%; z-index: 999; background: rgb(255, 255, 255); border: none;"><img src="images/gps2.png" style="height: 60%;"></button>
-       <!-- 약국 상세 정보를 띄울 창 -->
-       <div id="mask_info_detail" style="position: absolute; display: none; background: white; padding: 10px; width: 100%; height: 25vh; bottom: 0; right: 0; left: 0; z-index: 5000;">
-          <button id="mask_detail_close" style="float: right; border: none; background: #fff;"><img src="images/close.png" alt="" style=""></button>
-          <p style="font-size: 20px; padding: 5px;"><b id="place_detail_name"></b></p>
-          <p style="font-size: 17px;"><img src="images/mask_icon_gray.png" style="width: 30px;"><b id="place_detail_remain"></b></p>
-          <p id="place_detail_addr"></p>
-          <p id="place_detail_update"></p>
-       </div>
+    	<!-- 약국 상세 정보를 띄울 창 -->
+    	<div id="mask_info_detail" style="position: absolute; display: none; background: white; padding: 10px; width: 100%; height: 25vh; bottom: 0; right: 0; left: 0; z-index: 5000;">
+    		<button id="mask_detail_close" style="float: right; border: none; background: #fff;"><img src="images/close.png" alt="" style=""></button>
+    		<p style="font-size: 20px; padding: 5px;"><b id="place_detail_name"></b></p>
+    		<p style="font-size: 17px;"><img src="images/mask_icon_gray.png" style="width: 30px;"><b id="place_detail_remain"></b></p>
+    		<p id="place_detail_addr"></p>
+    		<p id="place_detail_update"></p>
+    	</div>
     </div>
     <div id="helpPopup" class="popup-div popup-style" style="background: #fff; position: absolute; z-index: 10000; padding: 15px;max-height: 90vh; width: 95vw; overflow-y: auto; left: 5px; right: 5px; margin-top: 50px; display: none;">
-       <button id="help_detail_close" style="float: right; border: none; background: #fff;"><img src="images/close.png" alt="" style=""></button>
-       <div class="popupContent">
-          <div class="b-ajax-wrapper">
-             <div>
-                <h2><b>도움말</b></h2>
-                <div style="border-bottom: 1px solid #eee">
-                   <h4><b>마스크 5부제란?</b></h4>
-                   <p>정부에서 2020년 3월 5일 내놓은 '마스크 수급 안정화 대책'에 포함된 내용으로, 지정된 날에만 공적 마스크를 구입할 수 있도록 한 것이다.<br>이는 코로나19 확진자 증가로 마스크 수요가 급증함에도 수급이 불안정한 상황에 따른 대책으로, 2020년 3월 9일부터 시행되었다.</p>
-                </div>
-                
-                <div style="border-bottom: 1px solid #eee">
-                   <h4><b>구매 가능 요일</b></h4>
-                   <img src="images/mask_info1.png" style="max-width: 100%;">
-                </div>
-                <div style="border-bottom: 1px solid #eee">
-                   <h4><b>구매 관련 정보</b></h4>
-                   <img src="images/mask_info2.png" style="max-width: 100%;">
-                </div>
-                <h4><b>대리구매 시 필요 서류</b></h4>
-                <p>대리구매자의 <b>신분증</b></p>
-                <p>대리구매자, 대상자 병기된 <b>주민등록 등본</b></p>
-             </div>
-          </div>
-       </div>
+    	<button id="help_detail_close" style="float: right; border: none; background: #fff;"><img src="images/close.png" alt="" style=""></button>
+    	<div class="popupContent">
+    		<div class="b-ajax-wrapper">
+    			<div>
+    				<h2><b>도움말</b></h2>
+    				<div style="border-bottom: 1px solid #eee">
+    					<h4><b>마스크 5부제란?</b></h4>
+    					<p>정부에서 2020년 3월 5일 내놓은 '마스크 수급 안정화 대책'에 포함된 내용으로, 지정된 날에만 공적 마스크를 구입할 수 있도록 한 것이다.<br>이는 코로나19 확진자 증가로 마스크 수요가 급증함에도 수급이 불안정한 상황에 따른 대책으로, 2020년 3월 9일부터 시행되었다.</p>
+    				</div>
+    				
+    				<div style="border-bottom: 1px solid #eee">
+	    				<h4><b>구매 가능 요일</b></h4>
+	    				<img src="images/mask_info1.png" style="max-width: 100%;">
+	    			</div>
+    				<div style="border-bottom: 1px solid #eee">
+	    				<h4><b>구매 관련 정보</b></h4>
+	    				<img src="images/mask_info2.png" style="max-width: 100%;">
+	    			</div>
+    				<h4><b>대리구매 시 필요 서류</b></h4>
+    				<p>대리구매자의 <b>신분증</b></p>
+    				<p>대리구매자, 대상자 병기된 <b>주민등록 등본</b></p>
+    			</div>
+    		</div>
+    	</div>
     </div>
     <div id="infoPopup" class="popup-div popup-style" style="background: #fff; position: absolute; z-index: 10000; padding: 20px; max-height: 90vh; max-width: 95vw; overflow-y: auto; margin-top: 50px; display: none;">
-       <button id="info_detail_close" style="float: right; border: none; background: #fff;"><img src="images/close.png" alt="" style=""></button>
-       <div class="popupContent">
-          <div class="b-ajax-wrapper">
-             <div>
-                <br><p>버전: Beta 1.0</p>
-                <p>기획 및 개발: 성보람</p>
-                <p>문의: alsks62@gmail.com</p>
-                <p>마스크 정보: 공공데이터포털</p>
-                <p>지도 및 검색기능: 카카오 지도 API</p>
-             </div>
-          </div>
-       </div>
+    	<button id="info_detail_close" style="float: right; border: none; background: #fff;"><img src="images/close.png" alt="" style=""></button>
+    	<div class="popupContent">
+    		<div class="b-ajax-wrapper">
+    			<div>
+    				<br><p>버전: Beta 1.0</p>
+    				<p>기획 및 개발: 성보람</p>
+    				<p>문의: alsks62@gmail.com</p>
+    				<p>마스크 정보: 공공데이터포털</p>
+    				<p>지도 및 검색기능: 카카오 지도 API</p>
+    			</div>
+    		</div>
+    	</div>
     </div>
 
-   <script type="text/javascript">
-      // javascript here!
-      var lat, lon;
-      var infowindow;
-      let xhr = new XMLHttpRequest();
-      var mapContainer = document.getElementById('map'); // 지도를 표시할 div
-      var markers = new Array();
-      var marker_infowindows = new Array();
-      var marker_positions = new Array();
+	<script type="text/javascript">
+		// javascript here!
+		var lat, lon;
+		var infowindow;
+		let xhr = new XMLHttpRequest();
+		var mapContainer = document.getElementById('map'); // 지도를 표시할 div
+		var markers = new Array();
+		var marker_infowindows = new Array();
+		var marker_positions = new Array();
 
-      if (checkMobileDevice()) {
-          mapOption = { 
-              center: new kakao.maps.LatLng(37.555958, 126.9686155), // 지도의 중심좌표
-              level: 4, // 지도의 확대 레벨 
-              maxLevel: 6
-          };
-      } else {
-          mapOption = { 
-              center: new kakao.maps.LatLng(37.555958, 126.9686155), // 지도의 중심좌표
-              level: 3, // 지도의 확대 레벨 
-              maxLevel: 4
-          };         
-      }
+		if (checkMobileDevice()) {
+		    mapOption = { 
+		        center: new kakao.maps.LatLng(37.555958, 126.9686155), // 지도의 중심좌표
+		        level: 4, // 지도의 확대 레벨 
+		        maxLevel: 6
+		    };
+		} else {
+		    mapOption = { 
+		        center: new kakao.maps.LatLng(37.555958, 126.9686155), // 지도의 중심좌표
+		        level: 3, // 지도의 확대 레벨 
+		        maxLevel: 4
+		    };			
+		}
 
-       var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-       var mapTypeControl = new kakao.maps.MapTypeControl();
-       var zoomControl = new kakao.maps.ZoomControl();
-       var resultPlace = new kakao.maps.services.Places();
-       var current_var;
-       var searchResultList = document.getElementById("searchListDiv");
-       var floatingSearch = document.getElementById("floating_search");
-       var placeArray = [];
-       var resultMarker;
-       var imageSize;
+	    var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+	    var mapTypeControl = new kakao.maps.MapTypeControl();
+	    var zoomControl = new kakao.maps.ZoomControl();
+	    var resultPlace = new kakao.maps.services.Places();
+	    var current_var;
+	    var searchResultList = document.getElementById("searchListDiv");
+	    var floatingSearch = document.getElementById("floating_search");
+	    var placeArray = [];
+	    var resultMarker;
+	    var imageSize;
 
-       var maskInfoHeight = window.screen.availHeight * 0.2;
-       var maskInfoWidth = window.screen.availHeight * 0.175;
-       var currentLocationHeight = window.screen.availHeight * 0.05;
-       document.getElementById("mask_info_img").style.height = maskInfoHeight + "px";
-       document.getElementById("mask_info_img").style.width = maskInfoWidth + "px";
-       document.getElementById("current_location").style.width = currentLocationHeight + "px";
-       document.getElementById("current_location").style.height = currentLocationHeight + "px";
-       
+	    var maskInfoHeight = window.screen.availHeight * 0.2;
+	    var maskInfoWidth = window.screen.availHeight * 0.175;
+	    var currentLocationHeight = window.screen.availHeight * 0.05;
+	    document.getElementById("mask_info_img").style.height = maskInfoHeight + "px";
+	    document.getElementById("mask_info_img").style.width = maskInfoWidth + "px";
+	    document.getElementById("current_location").style.width = currentLocationHeight + "px";
+	    document.getElementById("current_location").style.height = currentLocationHeight + "px";
+	    
 
-      if (checkMobileDevice()) {
-         imageSize = new kakao.maps.Size(48, 52); // 마커이미지의 크기입니다
-      } else {
-          imageSize = new kakao.maps.Size(60, 65); // 마커이미지의 크기입니다
-      }
+		if (checkMobileDevice()) {
+			imageSize = new kakao.maps.Size(48, 52); // 마커이미지의 크기입니다
+		} else {
+		    imageSize = new kakao.maps.Size(60, 65); // 마커이미지의 크기입니다
+		}
 
-      map.addControl(zoomControl, kakao.maps.ControlPosition.BOTTOMRIGHT);
-       map.addControl(mapTypeControl, kakao.maps.ControlPosition.BOTTOMRIGHT);
+		map.addControl(zoomControl, kakao.maps.ControlPosition.BOTTOMRIGHT);
+	    map.addControl(mapTypeControl, kakao.maps.ControlPosition.BOTTOMRIGHT);
 
-      getCurrentLocation();
+		getCurrentLocation();
 
-      $("#search").on("change keyup paste", function() {
-         current_var = $(this).val();
-         if (!current_var.replace(/^\s+|\s+$/g, '')) {
-            $("#searchListDiv").slideUp("fast");
-            floatingSearch.style.borderRadius = "20px";
-            document.getElementById('closeButton').style.display = "none";
-         } else {
-            $("#searchListDiv").slideDown("fast");
-            floatingSearch.style.borderRadius = "20px 20px 0 0";
-            resultPlace.keywordSearch(current_var, placesSearch);
-            document.getElementById('closeButton').style.display = "block";
-         }
-      });
-      
-      $("#searchButton").click(function() {
-         if (!current_var.replace(/^\s+|\s+$/g, '')) {
-                 alert('키워드를 입력해주세요!');
-               document.getElementById('closeButton').style.display = "none";
-                 return false;
-             }
-         else {
-            resultPlace.keywordSearch(current_var, placesSearchCB);
-            document.getElementById('closeButton').style.display = "block";
-         }
-      });
+		$("#search").on("change keyup paste", function() {
+			current_var = $(this).val();
+			if (!current_var.replace(/^\s+|\s+$/g, '')) {
+				$("#searchListDiv").slideUp("fast");
+				floatingSearch.style.borderRadius = "20px";
+				document.getElementById('closeButton').style.display = "none";
+			} else {
+				$("#searchListDiv").slideDown("fast");
+				floatingSearch.style.borderRadius = "20px 20px 0 0";
+				resultPlace.keywordSearch(current_var, placesSearch);
+				document.getElementById('closeButton').style.display = "block";
+			}
+		});
+		
+		$("#searchButton").click(function() {
+			if (!current_var.replace(/^\s+|\s+$/g, '')) {
+			        alert('키워드를 입력해주세요!');
+					document.getElementById('closeButton').style.display = "none";
+			        return false;
+			    }
+			else {
+				resultPlace.keywordSearch(current_var, placesSearchCB);
+				document.getElementById('closeButton').style.display = "block";
+			}
+		});
 
-      $("#closeButton").click(function() {
-         $("#searchListDiv").slideUp("fast");
-         document.getElementById("search").value = "";
-         floatingSearch.style.borderRadius = "20px";
-         document.getElementById('closeButton').style.display = "none";
-      });
+		$("#closeButton").click(function() {
+			$("#searchListDiv").slideUp("fast");
+			document.getElementById("search").value = "";
+			floatingSearch.style.borderRadius = "20px";
+			document.getElementById('closeButton').style.display = "none";
+		});
 
-      $("#mask_detail_close").click (function () {
-         $('#mask_info_detail').slideUp("fast");
-      });
-      $("#help").on('click', function(event) {
-         event.preventDefault();
-         $("#helpPopup").bPopup({
-            easing: 'easeOutput'
-         });
-      });
-      $('#help_detail_close').click (function() {
-         $("#helpPopup").bPopup().close();
-      });
+		$("#mask_detail_close").click (function () {
+			$('#mask_info_detail').slideUp("fast");
+		});
+		$("#help").on('click', function(event) {
+			event.preventDefault();
+			$("#helpPopup").bPopup({
+				easing: 'easeOutput'
+			});
+		});
+		$('#help_detail_close').click (function() {
+			$("#helpPopup").bPopup().close();
+		});
 
-      $("#info").on('click', function(event) {
-         event.preventDefault();
-         $("#infoPopup").bPopup({
-            easing: 'easeOutput'
-         });
-      });
-      $('#info_detail_close').click (function() {
-         $("#infoPopup").bPopup().close();
-      });
+		$("#info").on('click', function(event) {
+			event.preventDefault();
+			$("#infoPopup").bPopup({
+				easing: 'easeOutput'
+			});
+		});
+		$('#info_detail_close').click (function() {
+			$("#infoPopup").bPopup().close();
+		});
 
-      function checkMobileDevice() {
-           var mobileKeyWords = new Array('Android', 'iPhone', 'iPod', 'BlackBerry', 'Windows CE', 'SAMSUNG', 'LG', 'MOT', 'SonyEricsson');
-           for (var info in mobileKeyWords) {
-               if (navigator.userAgent.match(mobileKeyWords[info]) != null) {
-                   return true;
-               }
-           }
-           return false;
-       }
+		function checkMobileDevice() {
+	        var mobileKeyWords = new Array('Android', 'iPhone', 'iPod', 'BlackBerry', 'Windows CE', 'SAMSUNG', 'LG', 'MOT', 'SonyEricsson');
+	        for (var info in mobileKeyWords) {
+	            if (navigator.userAgent.match(mobileKeyWords[info]) != null) {
+	                return true;
+	            }
+	        }
+	        return false;
+	    }
 
-      function maskSearch (latitude, longitude) {
-         let jsonURL = "https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat="+ latitude +"&lng="+ longitude +"&m=4000";
-         xhr.open('GET', jsonURL);
-           xhr.send();
-           //응답을 받으면 함수 실행
-           xhr.onload = () => {
-               //응답받은 문자열을 자바스크립트 객체로 변환 해 준다.
-               let superHeroes = JSON.parse(xhr.response); 
-               parseJsonResult(superHeroes);
-           }
-      }
+		function maskSearch (latitude, longitude) {
+			let jsonURL = "https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat="+ latitude +"&lng="+ longitude +"&m=4000";
+			xhr.open('GET', jsonURL);
+	        xhr.send();
+	        //응답을 받으면 함수 실행
+	        xhr.onload = () => {
+	            //응답받은 문자열을 자바스크립트 객체로 변환 해 준다.
+	            let superHeroes = JSON.parse(xhr.response); 
+	            parseJsonResult(superHeroes);
+	        }
+		}
 
-      function placesSearch(data, status, pagination) {
-          if (status === kakao.maps.services.Status.OK) {
-              searchResultList.innerHTML = '';
-                placeArray = data;
-                if (data.length < 10) {
-                   document.getElementById("searchListDiv").style.height = data.length * 43 + 20 + "px";
-                } else {
-                   document.getElementById("searchListDiv").style.height = "80%";
-                }
-              for (var i = 0; i < data.length; i ++) {
-                 searchResultList.innerHTML += "<button class='place' onclick='buttonClick(this)' id='place" + i + "' style='border-bottom: 1px solid #efefef;'><b>" + data[i].place_name + "</b><br>"
-                 + data[i].address_name + "</button>";
-              }
-          } else if (status === kakao.maps.services.Status.ERROR) {
+		function placesSearch(data, status, pagination) {
+		    if (status === kakao.maps.services.Status.OK) {
+		        searchResultList.innerHTML = '';
+		       	placeArray = data;
+		       	if (data.length < 10) {
+		       		document.getElementById("searchListDiv").style.height = data.length * 43 + 20 + "px";
+		       	} else {
+		       		document.getElementById("searchListDiv").style.height = "80%";
+		       	}
+		        for (var i = 0; i < data.length; i ++) {
+		        	searchResultList.innerHTML += "<button class='place' onclick='buttonClick(this)' id='place" + i + "' style='border-bottom: 1px solid #efefef;'><b>" + data[i].place_name + "</b><br>"
+		        	+ data[i].address_name + "</button>";
+		        }
+		    } else if (status === kakao.maps.services.Status.ERROR) {
 
-              alert('검색 결과 중 오류가 발생했습니다.');
-              return;
-          } else {
-             document.getElementById("searchListDiv").style.height = 50 + "px";
-                searchResultList.innerHTML = "<b>검색 결과가 존재하지 않습니다</b>";
-             }
+		        alert('검색 결과 중 오류가 발생했습니다.');
+		        return;
+		    } else {
+		    	document.getElementById("searchListDiv").style.height = 50 + "px";
+	       		searchResultList.innerHTML = "<b>검색 결과가 존재하지 않습니다</b>";
+	       	}
 
-      }
+		}
 
-      function placesSearchCB(data, status, pagination) {
-          if (status === kakao.maps.services.Status.OK) {
-              searchResultList.innerHTML = '';
-                placeArray = data;
-                console.log(data.length);
-                if (data.length < 10) {
-                   document.getElementById("searchListDiv").style.height = data.length * 43 + 20 + "px";
-                } else {
-                   document.getElementById("searchListDiv").style.height = "80%";
-                }
-                for (var i = 0; i < data.length; i ++) {
-                 var placePosition = new kakao.maps.LatLng(data[i].y, data[i].x);
-                 searchResultList.innerHTML += "<button class='place' onclick='buttonClick(this)' id='place" + i + "' style='border-bottom: 1px solid #efefef;'><b>" + data[i].place_name + "</b><br>"
-                 + data[i].address_name + "</button>";
-              }
-          } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
-              alert('검색 결과가 존재하지 않습니다.');
-              return;
-          } else if (status === kakao.maps.services.Status.ERROR) {
-              alert('검색 결과 중 오류가 발생했습니다.');
-              return;
-          } else {
-             document.getElementById("searchListDiv").style.height = 50 + "px";
-                searchResultList.innerHTML = "<b> 검색 결과가 존재하지 않습니다</b>";
-             }
-      }
+		function placesSearchCB(data, status, pagination) {
+		    if (status === kakao.maps.services.Status.OK) {
+		        searchResultList.innerHTML = '';
+		       	placeArray = data;
+		       	console.log(data.length);
+		       	if (data.length < 10) {
+		       		document.getElementById("searchListDiv").style.height = data.length * 43 + 20 + "px";
+		       	} else {
+		       		document.getElementById("searchListDiv").style.height = "80%";
+		       	}
+	       		for (var i = 0; i < data.length; i ++) {
+		        	var placePosition = new kakao.maps.LatLng(data[i].y, data[i].x);
+		        	searchResultList.innerHTML += "<button class='place' onclick='buttonClick(this)' id='place" + i + "' style='border-bottom: 1px solid #efefef;'><b>" + data[i].place_name + "</b><br>"
+		        	+ data[i].address_name + "</button>";
+		        }
+		    } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
+		        alert('검색 결과가 존재하지 않습니다.');
+		        return;
+		    } else if (status === kakao.maps.services.Status.ERROR) {
+		        alert('검색 결과 중 오류가 발생했습니다.');
+		        return;
+		    } else {
+		    	document.getElementById("searchListDiv").style.height = 50 + "px";
+	       		searchResultList.innerHTML = "<b> 검색 결과가 존재하지 않습니다</b>";
+	       	}
+		}
 
-      function buttonClick (button) {
-         $("#searchListDiv").slideUp("fast");
-         floatingSearch.style.borderRadius = "20px";
-         goSearchResult(placeArray[button.id[5]]);
-      }
+		function buttonClick (button) {
+			$("#searchListDiv").slideUp("fast");
+			floatingSearch.style.borderRadius = "20px";
+			goSearchResult(placeArray[button.id[5]]);
+		}
 
-      function goSearchResult (data) {
-         console.log(data);
-         document.getElementById("search").value = data.place_name;
+		function goSearchResult (data) {
+			console.log(data);
+			document.getElementById("search").value = data.place_name;
 
-         var locPosition = new kakao.maps.LatLng(data.y, data.x);
-           var imageSrc = 'images/marker10.png', // 마커이미지의 주소입니다    
-           imageOption = {offset: new kakao.maps.Point(31, 59)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-     
-           var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+			var locPosition = new kakao.maps.LatLng(data.y, data.x);
+	        var imageSrc = 'images/marker10.png', // 마커이미지의 주소입니다    
+	        imageOption = {offset: new kakao.maps.Point(31, 59)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+	  
+	        var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
 
-           if (resultMarker == null) {
-              // 마커를 생성합니다
-              resultMarker = new kakao.maps.Marker({
-                  position: locPosition, 
-                  image: markerImage // 마커이미지 설정 
-            });
-            // 마커가 지도 위에 표시되도록 설정합니다
-            resultMarker.setMap(map); 
+	        if (resultMarker == null) {
+	        	// 마커를 생성합니다
+		        resultMarker = new kakao.maps.Marker({
+		            position: locPosition, 
+		            image: markerImage // 마커이미지 설정 
+				});
+				// 마커가 지도 위에 표시되도록 설정합니다
+				resultMarker.setMap(map); 
 
-           } else {
-              resultMarker.setPosition(locPosition);
-           }
-         map.panTo(locPosition);
-         maskSearch(data.y, data.x);
-      }
+	        } else {
+	        	resultMarker.setPosition(locPosition);
+	        }
+			map.panTo(locPosition);
+			maskSearch(data.y, data.x);
+		}
 
-      function getCurrentLocation () {
-         if (navigator.geolocation) {
-             // GeoLocation을 이용해서 접속 위치를 얻어옵니다
-             navigator.geolocation.getCurrentPosition(function(position) {
-                 
-                 lat = position.coords.latitude; // 위도
-                 lon = position.coords.longitude; // 경도
+		function getCurrentLocation () {
+			if (navigator.geolocation) {
+			    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+			    navigator.geolocation.getCurrentPosition(function(position) {
+			        
+			        lat = position.coords.latitude; // 위도
+			        lon = position.coords.longitude; // 경도
 
-                 if (lat == null)
-                    alert('GPS가 사용가능한지 확인해주세요!');
+			        if (lat == null)
+			        	alert('GPS가 사용가능한지 확인해주세요!');
 
-                 var locPosition = new kakao.maps.LatLng(lat, lon);
-                 var imageSrc = 'images/marker10.png', // 마커이미지의 주소입니다    
-                 imageOption = {offset: new kakao.maps.Point(31, 59)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-           
-                 // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
-                 var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
-                     markerPosition = new kakao.maps.LatLng(lat, lon); // 마커가 표시될 위치입니다
+			        var locPosition = new kakao.maps.LatLng(lat, lon);
+			        var imageSrc = 'images/marker10.png', // 마커이미지의 주소입니다    
+			        imageOption = {offset: new kakao.maps.Point(31, 59)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+			  
+			        // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+			        var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
+			            markerPosition = new kakao.maps.LatLng(lat, lon); // 마커가 표시될 위치입니다
 
-                 // 마커를 생성합니다
-                 var current_marker = new kakao.maps.Marker({
-                     position: markerPosition, 
-                     image: markerImage // 마커이미지 설정 
-               });
+			        // 마커를 생성합니다
+			        var current_marker = new kakao.maps.Marker({
+			            position: markerPosition, 
+			            image: markerImage // 마커이미지 설정 
+					});
 
-               // 마커가 지도 위에 표시되도록 설정합니다
-               current_marker.setMap(map); 
+					// 마커가 지도 위에 표시되도록 설정합니다
+					current_marker.setMap(map); 
 
-               // 지도 중심좌표를 접속위치로 변경합니다
-               map.panTo(locPosition);
+					// 지도 중심좌표를 접속위치로 변경합니다
+					map.panTo(locPosition);
 
-                maskSearch(lat, lon);
+			    	maskSearch(lat, lon);
 
-            });
+				});
 
-         } else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
-             alert('GPS가 사용가능한지 확인해주세요!');
-         }
+			} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+			    alert('GPS가 사용가능한지 확인해주세요!');
+			}
 
-      }
-      $("#current_location").click(function() {
-         if (lat != null) {
-            map.panTo(new kakao.maps.LatLng(lat, lon));
-            maskSearch(lat, lon);
-         } else {
-            getCurrentLocation();
-         }
-      });
+		}
+		$("#current_location").click(function() {
+			if (lat != null) {
+				map.panTo(new kakao.maps.LatLng(lat, lon));
+				maskSearch(lat, lon);
+			} else {
+				getCurrentLocation();
+			}
+		});
 
-      kakao.maps.event.addListener(map, 'dragend', function() {        
-             // 지도 중심좌표를 얻어옵니다 
-             var latlng = map.getCenter(); 
+		kakao.maps.event.addListener(map, 'dragend', function() {        
+			    // 지도 중심좌표를 얻어옵니다 
+			    var latlng = map.getCenter(); 
 
-             maskSearch(latlng.getLat(), latlng.getLng());
-             for (var i = 0; i < marker_infowindows.length; i ++) {
-                marker_infowindows[i].setMap(null);
-             }
-            $('#mask_info_detail').slideUp("fast");
-      });
+			    maskSearch(latlng.getLat(), latlng.getLng());
+			    for (var i = 0; i < marker_infowindows.length; i ++) {
+			    	marker_infowindows[i].setMap(null);
+			    }
+				$('#mask_info_detail').slideUp("fast");
+		});
 
-      function parseJsonResult(jsonObj) {
-         let heroes = jsonObj['stores'];
-         var markers_ = new Array();
-         var marker_infowindows_ = new Array();
-         var marker_positions_ = new Array();
-           heroes.forEach(element => {
-              var locPosition = new kakao.maps.LatLng(element.lat, element.lng);
-              var imageSrc_red = 'images/mask_red.png', 
-              imageSrc_yellow = 'images/mask_yellow.png',
-              imageSrc_green = 'images/mask_green.png',
-              imageSrc_gray = 'images/mask_gray2.png',// 마커이미지의 주소입니다
-              imageOption = {offset: new kakao.maps.Point(31, 59)};
+		function parseJsonResult(jsonObj) {
+			let heroes = jsonObj['stores'];
+			var markers_ = new Array();
+			var marker_infowindows_ = new Array();
+			var marker_positions_ = new Array();
+	        heroes.forEach(element => {
+		        var locPosition = new kakao.maps.LatLng(element.lat, element.lng);
+		        var imageSrc_red = 'images/mask_red.png', 
+		        imageSrc_yellow = 'images/mask_yellow.png',
+		        imageSrc_green = 'images/mask_green.png',
+		        imageSrc_gray = 'images/mask_gray2.png',// 마커이미지의 주소입니다
+	        	imageOption = {offset: new kakao.maps.Point(31, 59)};
 
-              var remain_mask = "";
+	        	var remain_mask = "";
 
-            var markerImageRed = new kakao.maps.MarkerImage(imageSrc_red, imageSize, imageOption),
-            markerImageYellow = new kakao.maps.MarkerImage(imageSrc_yellow, imageSize, imageOption),
-            markerImageGreen = new kakao.maps.MarkerImage(imageSrc_green, imageSize, imageOption),
-            markerImageGray = new kakao.maps.MarkerImage(imageSrc_gray, imageSize, imageOption),
-            markerPosition = new kakao.maps.LatLng(element.lat, element.lng);
-            var markerImage;
-            if (element.remain_stat == "plenty") {
-               markerImage = markerImageGreen;
-               remain_mask = "많음(100개 이상)";
-            }
-            else if (element.remain_stat == "some") {
-               markerImage = markerImageYellow;
-               remain_mask = "보통(30개~99개)";
-            }
-            else if (element.remain_stat == "few") {
-               markerImage = markerImageRed;
-               remain_mask = "적음(2개~29개)";
-            }
-            else {
-               markerImage = markerImageGray;
-               remain_mask = "없음(0개~1개)";
-            }
-               var mask_marker = new kakao.maps.Marker({
-                  position: locPosition, 
-                  image: markerImage
-            });
+				var markerImageRed = new kakao.maps.MarkerImage(imageSrc_red, imageSize, imageOption),
+				markerImageYellow = new kakao.maps.MarkerImage(imageSrc_yellow, imageSize, imageOption),
+				markerImageGreen = new kakao.maps.MarkerImage(imageSrc_green, imageSize, imageOption),
+				markerImageGray = new kakao.maps.MarkerImage(imageSrc_gray, imageSize, imageOption),
+				markerPosition = new kakao.maps.LatLng(element.lat, element.lng);
+				var markerImage;
+				if (element.remain_stat == "plenty") {
+					markerImage = markerImageGreen;
+					remain_mask = "많음(100개 이상)";
+				}
+				else if (element.remain_stat == "some") {
+					markerImage = markerImageYellow;
+					remain_mask = "보통(30개~99개)";
+				}
+				else if (element.remain_stat == "few") {
+					markerImage = markerImageRed;
+					remain_mask = "적음(2개~29개)";
+				}
+				else {
+					markerImage = markerImageGray;
+					remain_mask = "없음(0개~1개)";
+				}
+	            var mask_marker = new kakao.maps.Marker({
+		            position: locPosition, 
+		            image: markerImage
+				});
 
-            var iwContent = '<div class="overay_info"><div class="place_name"><button onclick="showDetailInfo(\'' + element.name + '\', \'' + remain_mask + '\', \'' + element.addr + '\', \'' + element.created_at + '\');" style="border:none; background: rgba(255, 255, 255, 0);"><span><h4><b>' + 
-                           element.name + 
-                           '</b><img src="images/right.png" style="height: 100%; margin-left: 10px;"></h4></span></button></div></div>';
-                            // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+				var iwContent = '<div class="overay_info"><div class="place_name"><button onclick="showDetailInfo(\'' + element.name + '\', \'' + remain_mask + '\', \'' + element.addr + '\', \'' + element.created_at + '\');" style="border:none; background: rgba(255, 255, 255, 0);"><span><h4><b>' + 
+									element.name + 
+									'</b><img src="images/right.png" style="height: 100%; margin-left: 10px;"></h4></span></button></div></div>';
+									 // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 
-             var info_window = new kakao.maps.CustomOverlay({
-                content : iwContent,
-                position: locPosition,
-                yAnchor: 1.7
-            });
+    			var info_window = new kakao.maps.CustomOverlay({
+				    content : iwContent,
+				    position: locPosition,
+				    yAnchor: 1.7
+				});
 
-            mask_marker.setMap(map); 
-            markers_.push(mask_marker);
-            marker_infowindows_.push(info_window);
-            marker_positions_.push(locPosition);
-           });
-         for (var i = 0; i < markers.length; i++) {
-            markers[i].setMap(null);
-          }
-          markers = markers_;
-          marker_infowindows = marker_infowindows_;
-          marker_positions = marker_positions_;
-           for (var i = 0; i < markers.length; i ++) {
-            kakao.maps.event.addListener(markers[i], 'click', markerClick(markers[i], marker_infowindows[i], marker_positions[i]));
-           }
-      }
+				mask_marker.setMap(map); 
+				markers_.push(mask_marker);
+				marker_infowindows_.push(info_window);
+				marker_positions_.push(locPosition);
+	        });
+			for (var i = 0; i < markers.length; i++) {
+				markers[i].setMap(null);
+		    }
+		    markers = markers_;
+		    marker_infowindows = marker_infowindows_;
+		    marker_positions = marker_positions_;
+	        for (var i = 0; i < markers.length; i ++) {
+				kakao.maps.event.addListener(markers[i], 'click', markerClick(markers[i], marker_infowindows[i], marker_positions[i]));
+	        }
+		}
 
-      function showDetailInfo(place_name, place_remain, place_addr, place_update) {
-         document.getElementById("place_detail_name").innerHTML = place_name;
-         document.getElementById("place_detail_remain").innerHTML = "&nbsp;&nbsp;&nbsp; 재고 " + place_remain;
-         document.getElementById("place_detail_addr").innerHTML = '<img src="images/place_gray.png" style="width: 30px;">&nbsp;&nbsp;&nbsp;' + place_addr;
-         document.getElementById("place_detail_update").innerHTML = '<img src="images/update_gray.png" style="width: 30px;">&nbsp;&nbsp;&nbsp; 업데이트시간:' + place_update;
-         $('#mask_info_detail').slideDown("fast");
-      }
+		function showDetailInfo(place_name, place_remain, place_addr, place_update) {
+			document.getElementById("place_detail_name").innerHTML = place_name;
+			document.getElementById("place_detail_remain").innerHTML = "&nbsp;&nbsp;&nbsp; 재고 " + place_remain;
+			document.getElementById("place_detail_addr").innerHTML = '<img src="images/place_gray.png" style="width: 30px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + place_addr + '&nbsp;&nbsp;&nbsp;&nbsp;<button class="copy btn tooltipped tooltipped-s" data-clipboard-text="'+ place_addr +'">주소복사</button>';
+			document.getElementById("place_detail_update").innerHTML = '<img src="images/update_gray.png" style="width: 30px;">&nbsp;&nbsp;&nbsp; 업데이트시간:' + place_update;
+			$('#mask_info_detail').slideDown("fast");
+		}
 
-      function markerClick(marker, infowindow, position) {
-         return function() {
-            $('#mask_info_detail').slideUp("fast");
-            for (var i = 0; i < marker_infowindows.length; i ++) {
-                marker_infowindows[i].setMap(null);
-             }
+		var clipboard = new Clipboard('.copy');
+		clipboard.on('success', function(e) {
+			e.clearSelection();
+			showTooltip(e.trigger, '복사됨!');
+		});
 
-            infowindow.setMap(map);
-            map.panTo(position);
-         }
-      }
+		function showTooltip(elem, msg) {
+			elem.setAttribute('class', 'btn tooltipped tooltipped-s');
+			elem.setAttribute('aria-label', msg);
+		}
 
-   </script>
+
+		function markerClick(marker, infowindow, position) {
+			return function() {
+				$('#mask_info_detail').slideUp("fast");
+				for (var i = 0; i < marker_infowindows.length; i ++) {
+			    	marker_infowindows[i].setMap(null);
+			    }
+
+				infowindow.setMap(map);
+				map.panTo(position);
+			}
+		}
+
+	</script>
 </body>
 </html>
