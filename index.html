@@ -219,7 +219,7 @@
     	<div class="popupContent">
     		<div class="b-ajax-wrapper">
     			<div>
-    				<br><p>버전: Beta 1.1</p>
+    				<br><p>버전: Beta 1.2</p>
     				<p>기획 및 개발: 성보람 / 김주성 / 최성석 / 김승현</p>
     				<p>문의 및 피드백</p>
                        <table border="1">
@@ -234,11 +234,15 @@
                             <td><input type="text" value="kimjs7725@gmail.com" id="myInput2" style="width:160px;height:auto;">김주성
                                 <button onclick="myFunction2()">복사하기</button></td>
                             </tr>
-                        </center>
+                            <tr>
+                            <td>테스트 담당</td>
+                            <td><input type="text" value="@gmail.com" id="myInput4" style="width:160px;height:auto;">김승현
+                                <button onclick="myFunction4()">복사하기</button></td>
+                            </tr>
                        </table><br/>
-    				<p>마스크 정보: 공공데이터포털</p>
-    				<p>지도 및 검색기능: 카카오 지도 API</p>
-    				<p>※마스크 재고량은 실시간이 아니며, 다소 부정확할 수 있습니다.</p>
+    				<p>마스크 정보 : 공공데이터포털</p>
+    				<p>지도 및 검색기능 : 카카오 지도 API</p>
+    				<p style="font-weight: bold;">※ 마스크 재고량은 실시간이 아니며, 다소 부정확할 수 있습니다 ※</p>
     			</div>
     		</div>
     	</div>
@@ -637,6 +641,28 @@
     oEle2.readOnly = true ;  // readOnly / input type 내용 수정 불가
     function myFunction2() { // 이메일 복사하는 function
         var copyText = document.getElementById("myInput2");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999)
+        document.execCommand("copy");
+        alert("복사 완료! :  " + copyText.value);
+    }
+
+    //이메일 주소 복사하기(3)
+    var oEle3 = document.getElementById('myInput3') ;
+    oEle4.readOnly = true ;  // readOnly / input type 내용 수정 불가
+    function myFunction3() { // 이메일 복사하는 function
+        var copyText = document.getElementById("myInput3");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999)
+        document.execCommand("copy");
+        alert("복사 완료! :  " + copyText.value);
+    }
+
+    //이메일 주소 복사하기(4)
+    var oEle4 = document.getElementById('myInput4') ;
+    oEle4.readOnly = true ;  // readOnly / input type 내용 수정 불가
+    function myFunction4() { // 이메일 복사하는 function
+        var copyText = document.getElementById("myInput4");
         copyText.select();
         copyText.setSelectionRange(0, 99999)
         document.execCommand("copy");
