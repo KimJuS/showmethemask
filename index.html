@@ -222,15 +222,19 @@
     				<br><p>버전: Beta 1.1</p>
     				<p>기획 및 개발: 성보람 / 김주성 / 최성석 / 김승현</p>
     				<p>문의 및 피드백</p>
-                       <table>
+                       <table border="0.5">
+                        <center>
                            <tr>
-                            <td>개발    : </td>
-                            <td>alsks62@gmail.com(성보람)</td>
+                            <td>개발 담당</td>
+                            <td><input type="text" value="alsks62@gmail.com" id="myInput1" style="width:160px;height:auto;">(성보람)
+                                <button onclick="myFunction1()">복사하기</button></td>
                            </tr>
                            <tr>
-                            <td>웹 서버 : </td>
-                            <td>kimjs7725@gmail.com(김주성)</td>
+                            <td>웹 서버 담당</td>
+                            <td><input type="text" value="kimjs7725@gmail.com" id="myInput2" style="width:160px;height:auto;">(김주성)
+                                <button onclick="myFunction2()">복사하기</button></td>
                             </tr>
+                        </center>
                        </table><br/>
     				<p>마스크 정보: 공공데이터포털</p>
     				<p>지도 및 검색기능: 카카오 지도 API</p>
@@ -617,6 +621,27 @@
 			}
 		}
 
+    //이메일 주소 복사하기(1)
+    var oEle1 = document.getElementById('myInput1') ;
+    oEle1.readOnly = true ;  // readOnly / input type 내용 수정 불가
+    function myFunction1() { // 이메일 복사하는 function
+        var copyText = document.getElementById("myInput1");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999)
+        document.execCommand("copy");
+        alert("복사 완료!");
+    }
+
+    //이메일 주소 복사하기(2)
+    var oEle2 = document.getElementById('myInput2') ;
+    oEle2.readOnly = true ;  // readOnly / input type 내용 수정 불가
+    function myFunction2() { // 이메일 복사하는 function
+        var copyText = document.getElementById("myInput2");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999)
+        document.execCommand("copy");
+        alert("복사 완료!");
+    }
 	</script>
 </body>
 </html>
