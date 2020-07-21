@@ -157,6 +157,10 @@
         li {
             text-align: -webkit-match-parent;
         }
+
+        td, input{
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -222,35 +226,35 @@
     				<br><p>버전: Beta 1.3</p>
     				<p>기획 및 개발: 성보람 / 김주성 / 최성석 / 김승현</p>
     				<p>문의 및 피드백</p>
-                       <table border="1" style="table-layout: fixed;">
+                       <table border="1" style="text-align: center;">
                             <tr>
-                                <td width="79px"><center>담당 부서</center></td>
-                                <td><center>성함</center></td>
-                                <td><center>개인 이메일</center></td>
+                                <td width="90px">담당 부서</td>
+                                <td>성함</td>
+                                <td>개인 이메일</td>
                             </tr>
-                           <tr>
-                            <td><center>개발 담당</center></td>
+                           <tr style="text-align: center;">
+                            <td>개발 담당</td>
                             <td width="50px"><center>성보람</center></td>
-                            <td><input type="text" value="alsks62@gmail.com" id="myInput1" style="width:160px;height:auto;border: none;">
+                            <td><input type="text" value="alsks62@gmail.com" id="myInput1" style="width:160px;height:auto;border:none;">
                                 <!-- <button onclick="myFunction1()">복사하기</button> --></td>
                            </tr>
                            <tr>
-                            <td><center>웹 서버 담당</center></td>
-                            <td width="50px"><center>김주성</center></td>
-                            <td><input type="text" value="kimjs7725@gmail.com" id="myInput2" style="width:160px;height:auto;border: none;">
-                                <button onclick="myFunction2()">복사하기</button></td>
+                            <td>웹 서버 담당</td>
+                            <td width="50px">김주성</td>
+                            <td><input type="text" value="kimjs7725@gmail.com" id="myInput2" style="width:160px;height:auto;border:none;">
+                                <!-- <button onclick="myFunction2()">복사하기</button> --></td>
                             </tr>
                             <tr>
-                            <td><center>기획 담당</center></td>
-                            <td width="50px"><center>최성석</center></td>
-                            <td><input type="text" value="tjdtjr234@naver.com" id="myInput3" style="width:160px;height:auto;border: none;">
-                                <button onclick="myFunction3()">복사하기</button></td>
+                            <td>기획 담당</td>
+                            <td width="50px">최성석</td>
+                            <td><input type="text" value="tjdtjr234@naver.com" id="myInput3" style="width:160px;height:auto;border:none;">
+                                <!-- <button onclick="myFunction3()">복사하기</button> --></td>
                             </tr>
                             <tr>
-                            <td><center>테스트 담당</center></td>
-                            <td width="50px"><center>김승현</center></td>
-                            <td><input type="text" value="kjn5185@naver.com" id="myInput4" style="width:160px;height:auto;border: none;">
-                                <button onclick="myFunction4()">복사하기</button></td>
+                            <td>테스트 담당</td>
+                            <td width="50px">김승현</td>
+                            <td><input type="text" value="kjn5185@naver.com" id="myInput4" style="width:160px;height:auto;border:none;">
+                                <!-- <button onclick="myFunction4()">복사하기</button> --></td>
                             </tr>
                        </table><br/>
     				<p>마스크 정보 : 공공데이터포털</p>
@@ -637,7 +641,7 @@
 				map.panTo(position);
 			}
 		}
-
+/*
     //이메일 주소 복사하기(1)
     var oEle1 = document.getElementById('myInput1') ;
     oEle1.readOnly = true ;  // readOnly / input type 내용 수정 불가
@@ -664,6 +668,7 @@
     var oEle3 = document.getElementById('myInput3') ;
     oEle3.readOnly = true ;  // readOnly / input type 내용 수정 불가
     function myFunction3() { // 이메일 복사하는 function
+
         var copyText = document.getElementById("myInput3");
         copyText.select();
         copyText.setSelectionRange(0, 99999)
@@ -680,7 +685,7 @@
         copyText.setSelectionRange(0, 99999)
         document.execCommand("copy");
         alert("복사 완료 :  " + copyText.value);
-    }
+    }*/
 	</script>
 </body>
 </html>
