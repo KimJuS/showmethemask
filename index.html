@@ -235,25 +235,25 @@
                            <tr style="text-align: center;">
                             <td>개발 담당</td>
                             <td width="50px"><center>성보람</center></td>
-                            <td><input type="text" value="alsks62@gmail.com" id="myInput1" style="width:160px;height:auto;border:none;">
+                            <td><input type="text" value="alsks62@gmail.com" id="myInput1" style="width:160px;height:auto;border:0.5;">
                                 <!-- <button onclick="myFunction1()">복사하기</button> --></td>
                            </tr>
                            <tr>
                             <td>웹 서버 담당</td>
                             <td width="50px">김주성</td>
-                            <td><input type="text" value="kimjs7725@gmail.com" id="myInput2" style="width:160px;height:auto;border:none;">
+                            <td><input type="text" value="kimjs7725@gmail.com" id="myInput2" style="width:160px;height:auto;border:0.5;">
                                 <!-- <button onclick="myFunction2()">복사하기</button> --></td>
                             </tr>
                             <tr>
                             <td>기획 담당</td>
                             <td width="50px">최성석</td>
-                            <td><input type="text" value="tjdtjr234@naver.com" id="myInput3" style="width:160px;height:auto;border:none;">
+                            <td><input type="text" value="tjdtjr234@naver.com" id="myInput3" style="width:160px;height:auto;border:0.5;">
                                 <!-- <button onclick="myFunction3()">복사하기</button> --></td>
                             </tr>
                             <tr>
                             <td>테스트 담당</td>
                             <td width="50px">김승현</td>
-                            <td><input type="text" value="kjn5185@naver.com" id="myInput4" style="width:160px;height:auto;border:none;">
+                            <td><input type="text" value="kjn5185@naver.com" id="myInput4" style="width:160px;height:auto;border:0.5;">
                                 <!-- <button onclick="myFunction4()">복사하기</button> --></td>
                             </tr>
                        </table><br/>
@@ -642,44 +642,45 @@
 			}
 		}
 
-    //이메일 주소 복사하기(1)
+    
     var oEle1 = document.getElementById('myInput1') ;
     oEle1.readOnly = true ;  // readOnly / input type 내용 수정 불가
+
+    var oEle2 = document.getElementById('myInput2') ;
+    oEle2.readOnly = true ;  // readOnly / input type 내용 수정 불가
+
+    var oEle3 = document.getElementById('myInput3') ;
+    oEle3.readOnly = true ;  // readOnly / input type 내용 수정 불가
+
+    var oEle4 = document.getElementById('myInput4') ;
+    oEle4.readOnly = true ;  // readOnly / input type 내용 수정 불가
+
     /*function myFunction1() { // 이메일 복사하는 function
         var copyText = document.getElementById("myInput1");
         copyText.select();
         copyText.setSelectionRange(0, 99999)
         document.execCommand("copy");
         alert("복사 완료 : " + copyText.value);
-    }*/
+    }
 
-    //이메일 주소 복사하기(2)
-    var oEle2 = document.getElementById('myInput2') ;
-    oEle2.readOnly = true ;  // readOnly / input type 내용 수정 불가
-    /*function myFunction2() { // 이메일 복사하는 function
+    function myFunction2() { // 이메일 복사하는 function
         var copyText = document.getElementById("myInput2");
         copyText.select();
         copyText.setSelectionRange(0, 99999)
         document.execCommand("copy");
         alert("복사 완료 :  " + copyText.value);
-    }*/
+    }
 
-    //이메일 주소 복사하기(3)
-    var oEle3 = document.getElementById('myInput3') ;
-    oEle3.readOnly = true ;  // readOnly / input type 내용 수정 불가
-    /*function myFunction3() { // 이메일 복사하는 function
+    function myFunction3() { // 이메일 복사하는 function
 
         var copyText = document.getElementById("myInput3");
         copyText.select();
         copyText.setSelectionRange(0, 99999)
         document.execCommand("copy");
         alert("복사 완료 :  " + copyText.value);
-    }*/
+    }
 
-    //이메일 주소 복사하기(4)
-    var oEle4 = document.getElementById('myInput4') ;
-    oEle4.readOnly = true ;  // readOnly / input type 내용 수정 불가
-    /*function myFunction4() { // 이메일 복사하는 function
+    function myFunction4() { // 이메일 복사하는 function
         var copyText = document.getElementById("myInput4");
         copyText.select();
         copyText.setSelectionRange(0, 99999)
